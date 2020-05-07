@@ -1,0 +1,34 @@
+{
+  "name": "mqtt_private_client",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./dist/mqtt.js",
+  "types": "./dist/types/index.d.ts",
+  "private": true,
+  "scripts": {
+    "build": "node build/webpack.config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Moobusy/mqtt_private_client.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Moobusy/mqtt_private_client/issues"
+  },
+  "homepage": "https://github.com/Moobusy/mqtt_private_client#readme",
+  "dependencies": {
+    "@types/mqtt": "^2.5.0",
+    "@types/qs": "^6.9.2",
+    "axios": "^0.19.2",
+    "mqtt": "^4.0.0"
+  },
+  "devDependencies": {
+    "clean-webpack-plugin": "^3.0.0",
+    "ts-loader": "^7.0.2",
+    "typescript": "^3.8.3",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11"
+  }
+}
