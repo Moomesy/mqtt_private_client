@@ -1,11 +1,10 @@
 import { MqttClient } from 'mqtt';
-import { MyStorage } from './storage';
 interface Resp {
     data: any;
     time: number;
 }
 declare type RespSuccess = (resp: Resp) => void;
-declare type RespParser = (resp: string) => any;
+declare type RespParser = (resp: object) => any;
 declare type RespFail = (error: Error) => void;
 interface OriginRespCallback {
     onMessage: (resp: string) => void;
@@ -41,18 +40,18 @@ declare class MyMQTT {
     protected subscribedTopics: Map<string, OriginRespCallback>;
     protected callbackScratchStacks: Map<string, RespCallback>;
     protected msgIdAutoIncrement: number;
-    protected storage: MyStorage;
     _generateMsgId(): string;
     onError: (err: Error) => {};
-    constructor(_config: Config, cachePrefix: string);
+    constructor(_config: Config);
     init(): Promise<unknown>;
     registerTopicHandle(topic: string): Promise<unknown>;
-    request({ url, parameter, parser, json, tiemOut }: {
+    request({ url, parameter, parser, json, tiemOut, uToken }: {
         url?: string;
         parameter?: Map<string, any>;
         parser?: RespParser;
         json?: boolean;
         tiemOut?: number;
+        uToken?: string;
     }): Promise<unknown>;
     publish({ topic, message }: {
         topic?: string;

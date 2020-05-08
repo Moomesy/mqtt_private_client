@@ -1,13 +1,12 @@
 "use strict";
 import { connect, MqttClient } from 'mqtt';
-import { MyStorage } from './storage';
 
 interface Resp {
     data: any,
     time: number
 }
 type RespSuccess = (resp: Resp) => void
-type RespParser = (resp: string) => any
+type RespParser = (resp: object) => any
 type RespFail = (error: Error) => void
 interface OriginRespCallback {
     onMessage: (resp: string) => void
@@ -46,7 +45,6 @@ class MyMQTT {
     protected subscribedTopics: Map<string, OriginRespCallback> = new Map()
     protected callbackScratchStacks: Map<string, RespCallback> = new Map()
     protected msgIdAutoIncrement = 0
-    protected storage: MyStorage
 
     _generateMsgId() {
         let dt = new Date().getTime();
@@ -57,9 +55,8 @@ class MyMQTT {
         return result.join('-').toUpperCase();
     }
     onError: (err: Error) => {}
-    constructor(_config: Config, cachePrefix: string) {
+    constructor(_config: Config) {
         this.config = _config
-        this.storage = new MyStorage(localStorage, cachePrefix)
     }
     init() {
         return new Promise((resolve, reject) => {
@@ -83,7 +80,7 @@ class MyMQTT {
             });
             // this.client.on("error", mqtt.onError)
 
-            this.client.on('message', function (topic: string, buffer: Buffer) {
+            this.client.on('message', (topic: string, buffer: Buffer) => {
                 const message = buffer.toString();
                 if (topic === this.responseTopic) {
 
@@ -128,9 +125,8 @@ class MyMQTT {
             })
         })
     }
-    request({ url = '' as string, parameter = null as Map<string, any>, parser = null as RespParser, json = false, tiemOut = 30000 }) {
+    request({ url = '' as string, parameter = null as Map<string, any>, parser = null as RespParser, json = false, tiemOut = 30000, uToken = '' }) {
         const topic = 'mq/request';
-        const uToken = '';
         const msgId = this._generateMsgId();
         if (!this.client) {
             return Promise.reject(Error("MQTT Client is not initialized!"))
