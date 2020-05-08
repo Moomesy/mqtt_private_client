@@ -1,6 +1,6 @@
 "use strict";
 import { connect, MqttClient } from 'mqtt';
-import MyStorage from './storage';
+import { MyStorage } from './storage';
 
 interface Resp {
     data: any,
@@ -39,7 +39,7 @@ interface Request {
 
 
 
-class MQTT {
+class MyMQTT {
     protected client: MqttClient = null
     protected config: Config
     protected responseTopic = ""
@@ -128,7 +128,6 @@ class MQTT {
             })
         })
     }
-    // 结构 http://192.168.0.10:8800/demo/request
     request({ url = '' as string, parameter = null as Map<string, any>, parser = null as RespParser, json = false, tiemOut = 30000 }) {
         const topic = 'mq/request';
         const uToken = '';
@@ -173,4 +172,6 @@ class MQTT {
 }
 
 
-export default MQTT;
+export {
+    MyMQTT
+};

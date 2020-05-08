@@ -1,4 +1,4 @@
-declare class storage {
+declare class MyStorage {
     storage: Storage;
     prefix: string;
     constructor(_storage: Storage, _prefix: string);
@@ -15,4 +15,4 @@ declare class storage {
      */
     clear(): void;
 }
-export default storage;
+export { MyStorage };

@@ -1,5 +1,5 @@
 import { MqttClient } from 'mqtt';
-import MyStorage from './storage';
+import { MyStorage } from './storage';
 interface Resp {
     data: any;
     time: number;
@@ -34,7 +34,7 @@ interface Request {
         msgId: string;
     };
 }
-declare class MQTT {
+declare class MyMQTT {
     protected client: MqttClient;
     protected config: Config;
     protected responseTopic: string;
@@ -59,4 +59,4 @@ declare class MQTT {
         message?: Request;
     }): void;
 }
-export default MQTT;
+export { MyMQTT };

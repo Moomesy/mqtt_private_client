@@ -27,7 +27,7 @@ function storageAvailable(storage: Storage) {
 }
 
 
-class storage {
+class MyStorage {
     storage: Storage = localStorage
     prefix: string = ""
 
@@ -94,4 +94,6 @@ class storage {
     }
 }
 
-export default storage;
+export {
+    MyStorage
+};
