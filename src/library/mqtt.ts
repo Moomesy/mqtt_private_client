@@ -67,7 +67,7 @@ class MyMQTT {
             }));
             this.responseTopic = `mq/response/${this.config.token}`;
             this.client = connect({
-                protocol: 'mqtt',
+                protocol: 'mqtts',
                 username: this.config.userName,
                 password: this.config.passWord,
                 servers
