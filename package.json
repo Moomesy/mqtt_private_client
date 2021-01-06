@@ -19,7 +19,7 @@
   "homepage": "https://github.com/Moobusy/mqtt_private_client#readme",
   "dependencies": {
     "@types/qs": "^6.9.2",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "mqtt": "^4.0.0"
   },
   "devDependencies": {
